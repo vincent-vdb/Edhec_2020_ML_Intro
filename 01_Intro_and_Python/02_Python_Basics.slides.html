@@ -13205,14 +13205,15 @@ a.anchor-link {
 <h1 id="Python-basics">Python basics<a class="anchor-link" href="#Python-basics">&#182;</a></h1>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2>
+<p><img src="images/python.png" alt=""></p>
+
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13313,8 +13314,9 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="images/popular_languages.jpg" alt=""></p>
-
+<h3 id="2019-most-popular-languages:">2019 most popular languages:<a class="anchor-link" href="#2019-most-popular-languages:">&#182;</a></h3><center>
+    <img src="images/popular_languages.jpg" width="600">
+</center>
 </div>
 </div>
 </div></div></section><section>
@@ -13739,7 +13741,8 @@ c
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13756,7 +13759,11 @@ c
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0, 1, 2, 3, 4]
+<pre>0
+1
+2
+3
+4
 </pre>
 </div>
 </div>
@@ -13771,7 +13778,7 @@ c
 <h1 id="III.-Object-collections">III. Object collections<a class="anchor-link" href="#III.-Object-collections">&#182;</a></h1><p>There are three main object collections in Python</p>
 <ul>
 <li>tuples: indexed immutable list of values defined by <code>( )</code></li>
-<li>listes: indexed mutable list of values defined by <code>[ ]</code></li>
+<li>lists: indexed mutable list of values defined by <code>[ ]</code></li>
 <li>dictionnaries: key-value pairs defined by <code>{ }</code> </li>
 </ul>
 <p>No matter the object, one has to use <code>[ ]</code> to access an element of the structure</p>
@@ -13916,7 +13923,7 @@ tup2 (3, 5)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Strings:-a-specific-kind-of-lists">Strings: a specific kind of lists<a class="anchor-link" href="#Strings:-a-specific-kind-of-lists">&#182;</a></h2><p>A string is just a list with specific methods (<code>.upper()</code>, <code>.find()</code>, <code>.count()</code>, <code>.replace()</code>...)</p>
+<h2 id="Strings:-a-specific-kind-of-lists">Strings: a specific kind of lists<a class="anchor-link" href="#Strings:-a-specific-kind-of-lists">&#182;</a></h2><p>A string is just a list with specific methods (<code>.upper()</code>, <code>.find()</code>, <code>.replace()</code>...)</p>
 <p>One can convert a string into a list:</p>
 <ul>
 <li>Character by character: <code>list(str)</code></li>
@@ -13940,8 +13947,8 @@ tup2 (3, 5)
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_dic</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Paris&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Lyon&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Bordeaux&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_dic</span><span class="p">[</span><span class="s1">&#39;Paris&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Paris&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Lyon&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Bordeaux&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">[</span><span class="s1">&#39;Paris&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -13980,8 +13987,8 @@ tup2 (3, 5)
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_dic</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_dic</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -14075,7 +14082,6 @@ dict_values([5, 2, 1])
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="IV.-Functions">IV. Functions<a class="anchor-link" href="#IV.-Functions">&#182;</a></h1><ul>
-<li>Les niveaux d’une fonction dépendent de l’indentation</li>
 <li>They are defined with <code>def function():</code> then indendation</li>
 <li>Function can return a value with <code>return</code> </li>
 <li>Documentation is within a doctring: <code>"""</code> </li>
@@ -14193,7 +14199,7 @@ dict_values([5, 2, 1])
     <span class="n">option1</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option1&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">option2</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option2&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">option1</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">option2</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tout est vrai&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All true&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="mi">2</span>
@@ -14398,9 +14404,9 @@ dict_values([5, 2, 1])
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="V.-Classes">V. Classes<a class="anchor-link" href="#V.-Classes">&#182;</a></h1><ul>
 <li>Object Oriented Programming is central is Python: all variables are objects</li>
-<li>A class is the descrition of an object, and how to build it</li>
+<li>A class is the description of an object, and how to build it</li>
 <li>An object is called an instance of a class</li>
-<li>Classes have attributes (internal variables) and methods (interval functions)</li>
+<li>Classes have attributes (internal variables) and methods (internal functions)</li>
 </ul>
 <p>Below is an example of class:</p>
 
@@ -14477,8 +14483,8 @@ dict_values([5, 2, 1])
 <p><strong>Exercise:</strong></p>
 <p>Define a <code>BankAccount</code> class, allowing to instantiate objects such as <code>account1</code>, <code>account2</code>.</p>
 <p>The constructor has two attributes, <code>name</code> and <code>balance</code>, with respective default values <code>'Bill'</code> and <code>0</code>.</p>
-<p>Implement three methods:
-- <code>deposit(amount)</code> allows to add amount to the balance
+<p>Implement three methods:</p>
+<p>- <code>deposit(amount)</code> allows to add amount to the balance
 - <code>withdrawal(amount)</code> allows to remove amount to the balance
 - <code>display_balance()</code> allows to display the balance, with a warning in case of negative balance</p>
 
