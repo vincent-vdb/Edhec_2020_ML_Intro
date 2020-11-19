@@ -13658,7 +13658,7 @@ data type: int64
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="I.4-Broadcasting">I.4 Broadcasting<a class="anchor-link" href="#I.4-Broadcasting">&#182;</a></h2><p>In some cases, mathematical operations can be execute on arrays of different dimensions.</p>
+<h2 id="I.4-Broadcasting">I.4 Broadcasting<a class="anchor-link" href="#I.4-Broadcasting">&#182;</a></h2><p>In some cases, mathematical operations can be executed on arrays of different dimensions.</p>
 <p>To do so, there has to be <strong>one dimension in common</strong>:</p>
 
 </div>
@@ -13669,8 +13669,9 @@ data type: int64
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr_id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">arr_id</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">arr_ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">arr_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">arr_ones</span><span class="o">*</span><span class="n">arr_vals</span>
 </pre></div>
 
     </div>
@@ -13689,9 +13690,9 @@ data type: int64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1., 2.],
-       [1., 2.],
-       [1., 2.]])</pre>
+<pre>array([[5., 8.],
+       [5., 8.],
+       [5., 8.]])</pre>
 </div>
 
 </div>
@@ -13742,7 +13743,7 @@ data type: int64
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercise :</strong></p>
+<p><strong>Exercise:</strong></p>
 <ul>
 <li>Generate an array with values from 0 to 8.</li>
 <li>Display values 1 to 6.</li>
@@ -14239,7 +14240,7 @@ Name: Germany, dtype: object</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One of the most powerful aspect of Pandas is the ability to deal with a lot of databases: CSV, SQL, html, Excel...</p>
+<p>One of the most powerful aspect of Pandas is the ability to deal with a lot of databases: CSV, SQL, HTML, Excel...</p>
 <p>There is usually a dedicated function, following the template <code>pd.read_[datatype]()</code>.</p>
 <p>For example, let's load a CSV file with <code>pd.read_csv()</code>:</p>
 
@@ -14488,12 +14489,14 @@ Name: Germany, dtype: object</pre>
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 979 entries, 0 to 978
 Data columns (total 6 columns):
-star_rating       979 non-null float64
-title             979 non-null object
-content_rating    976 non-null object
-genre             979 non-null object
-duration          979 non-null int64
-actors_list       979 non-null object
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   star_rating     979 non-null    float64
+ 1   title           979 non-null    object 
+ 2   content_rating  976 non-null    object 
+ 3   genre           979 non-null    object 
+ 4   duration        979 non-null    int64  
+ 5   actors_list     979 non-null    object 
 dtypes: float64(1), int64(1), object(4)
 memory usage: 46.0+ KB
 </pre>
