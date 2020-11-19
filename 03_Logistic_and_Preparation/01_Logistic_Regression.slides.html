@@ -13314,9 +13314,9 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Just like a linear regression, it will apply <strong>parameters $\theta = (\theta_1, \theta_2...)$</strong> to each feature $(x_1, x_2...)$ as a <strong>weighted sum</strong> (or a scalar product). Those parameters $\theta$ can be seen as the <strong>weights</strong> of each feature $i$:</p>
+<p>Just like a linear regression, it will apply <strong>parameters $\theta = (\theta_1, \theta_2...)$</strong> to each feature $(x_1, x_2...)$ as a <strong>weighted sum</strong> (or a scalar product). Those parameters $\theta$ can be seen as the <strong>weights</strong> of each feature $j$:</p>
 $$
-\theta \cdot X = \sum_i \theta_i \times x_i
+\theta \cdot X = \sum_j \theta_j \times x_j
 $$
 </div>
 </div>
@@ -13326,7 +13326,7 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will then just add one more parameter, a <strong>bias $b$</strong>, sometimes noted $\theta_0$, so that we have the following formula:</p>
 $$
-z = \sum_i \theta_i \times x_i + b = \theta \cdot X + b
+z = \sum_j \theta_j \times x_j + b = \theta \cdot X + b
 $$
 </div>
 </div>
@@ -13433,18 +13433,25 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Thus, minimizing this loss function will ensure a good classification.</p>
 <p>In real life, we have not one, but many <strong>samples</strong> on which we want to optimize our classification.</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>The loss will will then be written as:</p>
 $$
-\mathcal{L} = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\,\log(h(x^{(i)}))\,+\,(1-y^{(i)})\log (1 - h(x^{(i)}))
+\mathcal{L} = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\,\log(h_{\theta}(x^{(i)}))\,+\,(1-y^{(i)})\log (1 - h_{\theta}(x^{(i)}))
 $$<p>Where:</p>
 <ul>
-<li>$^{(i)}$ is a sample: in our customer churn example, <strong>a sample is just a customer</strong> in the database.</li>
+<li>$(i)$ is a sample: in our customer churn example, <strong>a sample is just a customer</strong> in the database.</li>
 <li>$m$ is the number of samples, so the number of customers in the database.</li>
 </ul>
 
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13457,7 +13464,7 @@ $$<p>Where:</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, we want to find the $\theta$ parameters that minimize our loss:</p>
 $$
-\displaystyle \min_{\theta} \mathcal{L} = \min_{\theta}-\frac{1}{m} \sum_{i=1}^m y^{(i)}\,\log(h(x^{(i)}))\,+\,(1-y^{(i)})\log (1 - h(x^{(i)}))
+\displaystyle \min_{\theta} \mathcal{L} = \min_{\theta}-\frac{1}{m} \sum_{i=1}^m y^{(i)}\,\log(h_{\theta}(x^{(i)}))\,+\,(1-y^{(i)})\log (1 - h_{\theta}(x^{(i)}))
 $$
 </div>
 </div>
@@ -13515,9 +13522,9 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Mathematically, this just means that we compute the partial derivative of the function for all $\theta_i$:</p>
+<p>Mathematically, this just means that we compute the partial derivative of the function for all $\theta_j$:</p>
 $$
-d\theta_i =\frac{\partial}{\partial\theta_i}\mathcal{L} = (y - h_{\theta}(x)) x_i
+d\theta_j =\frac{\partial}{\partial\theta_j}\mathcal{L} = (y - h_{\theta}(x)) x_j
 $$<p>This will show us the direction that goes down the most.</p>
 
 </div>
@@ -13528,7 +13535,7 @@ $$<p>This will show us the direction that goes down the most.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Then we update our model parameters:
 $$
-\displaystyle \theta_i = \theta_i - \alpha\frac{\partial}{\partial\theta_i}\mathcal{L} = \theta_i - \alpha d\theta_i
+\displaystyle \theta_j = \theta_j - \alpha\frac{\partial}{\partial\theta_j}\mathcal{L} = \theta_j - \alpha d\theta_j
 $$</p>
 <p>Meaning, we take a step toward this direction and update our model accordingly.</p>
 <p>The newly introduced parameter $\alpha$ is called the <strong>learning rate</strong>. The learning rate will control the size of the steps.</p>
@@ -14021,7 +14028,7 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can use the parameters $\theta_i$, associated to our features $x_i$.</p>
+<p>We can use the parameters $\theta_j$, associated to our features $x_j$.</p>
 <p>Indeed, the parameters $\theta$ are just weights, applied to each feature:</p>
 <ul>
 <li>a very small weight would mean a feature of low importance</li>
