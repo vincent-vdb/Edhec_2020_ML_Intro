@@ -13980,7 +13980,7 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We have an accuracy of 67.4 %. Better than a random model.</p>
+<p>We have an accuracy of 65.7 %. Better than a random model.</p>
 
 </div>
 </div>
@@ -14002,7 +14002,7 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>How can we incorporate the <code>Sex</code> (string <code>male</code> of <code>female</code>) into the features X of our model?</p>
+<p>How can we incorporate the <code>Sex</code> (string <code>male</code> or <code>female</code>) into the features X of our model?</p>
 <blockquote><p>Reminder: a model works only with numbers, not characters!</p>
 </blockquote>
 
@@ -14107,7 +14107,7 @@ Name: Sex, dtype: object</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We have now replaced the strings <code>female</code> and <code>male</code> in the <code>Sex</code> column with <code>0</code> and <code>1</code>.</p>
+<p>We have now replaced the strings <code>male</code> and <code>female</code> in the <code>Sex</code> column with <code>0</code> and <code>1</code>.</p>
 <p>Let's see if this improves our model performances:</p>
 
 </div>
@@ -14662,7 +14662,7 @@ Name: Embarked, dtype: object</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Probably not, but this is what our model will 'think'.</p>
+<p>Probably not, but this is what our model might 'think'.</p>
 <p>Thus, we have to rescale those features, to set them on the same level.</p>
 <p>How could we do such a thing?</p>
 
