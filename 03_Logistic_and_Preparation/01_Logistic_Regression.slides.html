@@ -13640,7 +13640,37 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="IV.-Example-of-Iris-classification">IV. Example of Iris classification<a class="anchor-link" href="#IV.-Example-of-Iris-classification">&#182;</a></h1>
+<h1 id="IV.-Example-of-Iris-classification-with-scikit-learn">IV. Example of Iris classification with scikit-learn<a class="anchor-link" href="#IV.-Example-of-Iris-classification-with-scikit-learn">&#182;</a></h1>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center>
+    <img src="images/sklearn_logo.png" width=400>
+</center>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Probably the most widely used package for machine learning, scikit-learn has a lot of defined models and tools, for various applications:</p>
+<ul>
+<li>Classification: SVM, k-NN, Logistic Regression, Random Forest…</li>
+<li>Regressions: Linear regression, Ridge regression, LASSO...</li>
+<li>Clustering: k-means...</li>
+<li>Dimensionality Reduction: PCA, t-SNE...</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="IV.1.-The-iris-dataset">IV.1. The iris dataset<a class="anchor-link" href="#IV.1.-The-iris-dataset">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -13830,7 +13860,7 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IV.1.-Train-a-logistic-regression-model-with-scikit-learn">IV.1. Train a logistic regression model with scikit-learn<a class="anchor-link" href="#IV.1.-Train-a-logistic-regression-model-with-scikit-learn">&#182;</a></h2>
+<h2 id="IV.2.-Train-a-logistic-regression-model">IV.2. Train a logistic regression model<a class="anchor-link" href="#IV.2.-Train-a-logistic-regression-model">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -14012,7 +14042,7 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IV.2.-Interpretation">IV.2. Interpretation<a class="anchor-link" href="#IV.2.-Interpretation">&#182;</a></h2>
+<h2 id="IV.3.-Interpretation">IV.3. Interpretation<a class="anchor-link" href="#IV.3.-Interpretation">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -14129,7 +14159,7 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IV.3.-[Optional]-Learning-curve">IV.3. [Optional] Learning curve<a class="anchor-link" href="#IV.3.-[Optional]-Learning-curve">&#182;</a></h2>
+<h2 id="IV.4.-[Optional]-Learning-curve">IV.4. [Optional] Learning curve<a class="anchor-link" href="#IV.4.-[Optional]-Learning-curve">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -14210,15 +14240,30 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <h1 id="V.-Other-classification-models">V. Other classification models<a class="anchor-link" href="#V.-Other-classification-models">&#182;</a></h1>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There exist many classification models. Let's quickly review some of the most frequently used and their scikit-learn implentations.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="V.1.-k-NN">V.1. k-NN<a class="anchor-link" href="#V.1.-k-NN">&#182;</a></h2>
+</div>
+</div>
 </div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There exist many classification models. Here are some of the most frequently used and their scikit-learn class:</p>
+<p>k-NN stands for k nearest neighboors.</p>
+<p>The idea is the following:</p>
 <ul>
-<li>k-NN: using k closest neighbors to define the class<div class="highlight"><pre><span></span><span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span>
-</pre></div>
-</li>
+<li>Given a test sample, the <code>k</code> nearest points in the train dataset are found</li>
+<li>Within the <code>k</code> nearest points, the majority class is the prediction class</li>
 </ul>
 
 </div>
@@ -14227,11 +14272,41 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Support Vector Machine (SVM): maximizing margin, can use kernel for non linearity<div class="highlight"><pre><span></span><span class="n">sklearn</span><span class="o">.</span><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span>
+<p><img src="images/knn_classification.png" alt=""></p>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The implementation with scikit-learn is with the following class:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
-</li>
-</ul>
+<p>Where <code>n_neighbors</code> is the number <code>k</code> of nearest neighboors to take.</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In practice, k-NN is not very used and is rarely a powerful model.</p>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="V.2.-Support-Vector-Machine">V.2. Support Vector Machine<a class="anchor-link" href="#V.2.-Support-Vector-Machine">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Support Vector Machine is a classifying algorithm that was very popular back in the 90s and early 2000s.</p>
 
 </div>
 </div>
@@ -14239,10 +14314,33 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Naive Bayes: based on Bayes theorem<div class="highlight"><pre><span></span><span class="n">sklearn</span><span class="o">.</span><span class="n">naive_bayes</span><span class="o">.</span><span class="n">GaussianNB</span>
+<p>The main idea is to maximize the margin that separates the classes.</p>
+<center>
+    <img src='images/SVM_margin.png' width=500>
+</center>
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-use-of-a-kernel">The use of a kernel<a class="anchor-link" href="#The-use-of-a-kernel">&#182;</a></h3><p>In SVM, is it possible to perform <strong>non linear classification</strong> using a kernel. Thanks to a kernel, non linear separation of the data can be achieved.</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The implementation is scikit-learn is in the following class:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
 </pre></div>
-</li>
+<p>Here are among the most widely used kernels:</p>
+<ul>
+<li><code>'linear'</code> (i.e. no kernel)</li>
+<li><code>'poly'</code> for a polynomial kernel</li>
+<li><code>'rbf'</code> for a <a href="https://en.wikipedia.org/wiki/Radial_basis_function_kernel">radial basis kernel</a></li>
+<li><code>'sigmoid'</code> for a sigmoid kernel</li>
 </ul>
 
 </div>
@@ -14251,47 +14349,86 @@ y labels: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If I want, for example, to use k-NN, the code would be extremely similar to logistic regression:</p>
+<h2 id="V.3.-Naive-Bayes">V.3. Naive Bayes<a class="anchor-link" href="#V.3.-Naive-Bayes">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Naive Bayes classifier</strong> is based on <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes' theorem</a>.</p>
+<p>This algorithm is designed as 'naive' because is assumes a strong independance between the input features. It is for example used in <a href="https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering">spam filtering</a>.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is available in scikit-learn with the following class:</p>
+<div class="highlight"><pre><span></span><span class="n">sklearn</span><span class="o">.</span><span class="n">naive_bayes</span><span class="o">.</span><span class="n">GaussianNB</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="V.4.-What-model-to-choose?">V.4. What model to choose?<a class="anchor-link" href="#V.4.-What-model-to-choose?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="images/SVM_or_LogisticRegression.png" alt=""></p>
 
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We import and instantiate the model</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
-<span class="c1"># Fit the model</span>
-<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="c1"># Evaluate the model</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;k-NN accuracy:&#39;</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>k-NN accuracy: 0.9666666666666667
-</pre>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What model to use?</p>
+<p>There is no rule working all the time. The best way to know what model performs the best, evaluating both is the safely way to have the answer.</p>
 
 </div>
 </div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Although, some rules may help in some cases. Let's consider a case with <code>m</code> samples and <code>n</code> features:</p>
+<table>
+<thead><tr>
+<th style="text-align:center">Case</th>
+<th style="text-align:center">What model to use?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">n large and n &gt;&gt; m</td>
+<td style="text-align:center">Logistic Regression or SVM with linear kernel</td>
+</tr>
+<tr>
+<td style="text-align:center">n small, m intermediate</td>
+<td style="text-align:center">SVM with RBF kernel</td>
+</tr>
+<tr>
+<td style="text-align:center">m large and m &gt;&gt; n</td>
+<td style="text-align:center">Feature engineering, then Logistic Regression or SVM with linear kernel</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Small $\simeq$ 10 - 100</li>
+<li>Medium $\simeq$ 100 - 10000</li>
+<li>Large &gt; 10000</li>
+</ul>
 
+</div>
+</div>
 </div></div></section></section>
 </div>
 </div>
