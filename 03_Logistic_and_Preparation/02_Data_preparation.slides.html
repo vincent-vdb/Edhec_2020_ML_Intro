@@ -13306,7 +13306,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Continous-vs-discrete-data">Continous vs discrete data<a class="anchor-link" href="#Continous-vs-discrete-data">&#182;</a></h2>
+<h2 id="Continuous-vs-discrete-data">Continuous vs discrete data<a class="anchor-link" href="#Continuous-vs-discrete-data">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -13339,7 +13339,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>N.B.: discrete does not necessarily mean categorical!</p>
+<blockquote><p>N.B.: discrete does not necessarily mean qualitative!</p>
 </blockquote>
 
 </div>
@@ -13404,33 +13404,11 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Missing-values">Missing values<a class="anchor-link" href="#Missing-values">&#182;</a></h2>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The first thing to do is to have a look and check the data:</p>
-<ul>
-<li>What are the available features?</li>
-<li>Are there missing values?</li>
-<li>Are there duplicates?</li>
-<li>Are there outliers?</li>
-<li>If so, how to handle them?</li>
-</ul>
-
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>First load the dataset, and have a look at the features:</p>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
@@ -13607,11 +13585,33 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>The first thing to do is to have a look and check the data:</p>
+<ul>
+<li>What are the available features?</li>
+<li>Are there missing values?</li>
+<li>Are there duplicates?</li>
+<li>Are there outliers?</li>
+<li>If so, how to handle them?</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Missing-values">Missing values<a class="anchor-link" href="#Missing-values">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>We can first check for missing values:</p>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
@@ -13675,15 +13675,40 @@ dtype: int64</pre>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will choose several policies:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>687 missing cabins: remove the feature completely</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>177 missing ages: replace by the mean age</li>
-<li>687 missing cabins: remove the feature completely</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
 <li>2 missing embarked: just remove those two rows</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
@@ -13693,17 +13718,50 @@ dtype: int64</pre>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Cabin&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Cleaning Embarked - removing rows with missing values</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">])</span>
 
 <span class="c1"># Cleaning Age - replacing by mean value</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># Check there is no remaining missing values</span>
+<span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></div></section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Survived    0
+Pclass      0
+Name        0
+Sex         0
+Age         0
+SibSp       0
+Parch       0
+Ticket      0
+Fare        0
+Embarked    0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13988,14 +14046,14 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="II.2-Categorical-Data-Transformation">II.2 Categorical Data Transformation<a class="anchor-link" href="#II.2-Categorical-Data-Transformation">&#182;</a></h2>
+<h2 id="II.2-Qualitative-Data-Transformation">II.2 Qualitative Data Transformation<a class="anchor-link" href="#II.2-Qualitative-Data-Transformation">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Categorical-data:-Binary-variables">Categorical data: Binary variables<a class="anchor-link" href="#Categorical-data:-Binary-variables">&#182;</a></h2>
+<h2 id="Qualitative-data:-Binary-variables">Qualitative data: Binary variables<a class="anchor-link" href="#Qualitative-data:-Binary-variables">&#182;</a></h2>
 </div>
 </div>
 </div></div><div class="fragment">
@@ -14156,7 +14214,7 @@ Name: Sex, dtype: object</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Categorical-data:-polytomous/multinomial-variables">Categorical data: polytomous/multinomial variables<a class="anchor-link" href="#Categorical-data:-polytomous/multinomial-variables">&#182;</a></h2>
+<h2 id="Qualitative-data:-polytomous/multinomial-variables">Qualitative data: polytomous/multinomial variables<a class="anchor-link" href="#Qualitative-data:-polytomous/multinomial-variables">&#182;</a></h2>
 </div>
 </div>
 </div><div class="fragment">
@@ -14459,7 +14517,7 @@ Name: Embarked, dtype: object</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We have now taken into account all categorical features, let's run our model on it.</p>
+<p>We have now taken into account all qualitative features, let's run our model on it.</p>
 <p>Let's see if this improves our model performances:</p>
 
 </div>
@@ -15061,7 +15119,7 @@ Name: Embarked, dtype: object</pre>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We keep only the title here</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 
@@ -15288,7 +15346,7 @@ Name: Title, dtype: object</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Accuracy: 0.7247191011235955
+<pre>Accuracy: 0.7191011235955056
 </pre>
 </div>
 </div>
