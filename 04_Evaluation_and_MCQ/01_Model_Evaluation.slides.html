@@ -13628,12 +13628,12 @@ a.anchor-link {
 </thead>
 <tbody>
 <tr>
-<td>Predicted Not Churner 👎</td>
+<td>Predicted Not Churner</td>
 <td>49</td>
 <td>5</td>
 </tr>
 <tr>
-<td>Predict Churner 👍</td>
+<td>Predict Churner</td>
 <td>1</td>
 <td>45</td>
 </tr>
@@ -13648,7 +13648,7 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Accuracy as we know it can be redefined as:
 $$Accuracy = \frac{TP + TN}{TP + TN + FN + FP}$$</p>
-<p>In our case, $Accuracy = \frac{49 + 45}{49 + 5 + 1 45} = 0.94$</p>
+<p>In our case, $Accuracy = \frac{49 + 45}{49 + 5 + 1 + 45} = 0.94$</p>
 <p>Our model has an accuracy of 94%. For this kind of application, this would be quite acceptable.</p>
 
 </div>
@@ -13667,12 +13667,12 @@ $$Accuracy = \frac{TP + TN}{TP + TN + FN + FP}$$</p>
 </thead>
 <tbody>
 <tr>
-<td>Predicted Healthy 👎</td>
+<td>Predicted Healthy</td>
 <td>49</td>
 <td>5</td>
 </tr>
 <tr>
-<td>Predict Cancerous 👍</td>
+<td>Predict Cancerous</td>
 <td>1</td>
 <td>45</td>
 </tr>
@@ -13723,7 +13723,9 @@ $$Accuracy = \frac{TP + TN}{TP + TN + FN + FP}$$</p>
 $$
 Precision = \frac{TP}{TP + FP}
 $$$$
-Recall = \frac{TP}{P} = \frac{TP}{TP + FN}
+\
+$$$$
+Recall = \frac{TP}{TP + FN}
 $$
 </div>
 </div>
@@ -13759,7 +13761,7 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here, we would have a F1-score of:
 $$
-F1\_score = \frac{2 \times 0.978 * 0.9}{0.978 + 0.9} = 0.9375 = 93.75 \%
+F1\_score = \frac{2 \times 0.978 \times 0.9}{0.978 + 0.9} = 0.9375 = 93.75 \%
 $$</p>
 
 </div>
@@ -13784,6 +13786,14 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>ROC stands for receiver operating characteristics.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Most of the time, a classifier returns a value between 0 and 1 (that usually considered as a probability), and we consider the highest probability as the predicted class.</p>
 <blockquote><p>In scikit-learn instead of predicting the class label with <code>model.predict(X)</code>,
 one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
@@ -13803,7 +13813,7 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then we can plot the curve ROC with the TPR as a function of the FPR:</p>
+<p>Then we can plot the ROC curve with the TPR as a function of the FPR:</p>
 <p><img src="images/roc_curves.png" alt=""></p>
 
 </div>
@@ -13885,8 +13895,8 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see a full implementation example on the <em>breast cancer dataset</em>.</p>
-<p>First, let's load and split the data.</p>
+<p>Let's see a full implementation example on the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html">breast cancer dataset</a>.</p>
+<p>First, let's load the data.</p>
 
 </div>
 </div>
@@ -13897,13 +13907,9 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="c1"># Load the data</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Split the data</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
-
-<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -13922,6 +13928,125 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 
 
 <div class="output_text output_subarea output_execute_result">
+<pre>((569, 30), (569,))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What are the next steps?</p>
+<p>Let's assume we have clean data: no missing value, no duplicates, no outliers.</p>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can have a look at the features:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let&#39;s print the two first rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1.799e+01 1.038e+01 1.228e+02 1.001e+03 1.184e-01 2.776e-01 3.001e-01
+  1.471e-01 2.419e-01 7.871e-02 1.095e+00 9.053e-01 8.589e+00 1.534e+02
+  6.399e-03 4.904e-02 5.373e-02 1.587e-02 3.003e-02 6.193e-03 2.538e+01
+  1.733e+01 1.846e+02 2.019e+03 1.622e-01 6.656e-01 7.119e-01 2.654e-01
+  4.601e-01 1.189e-01]
+ [2.057e+01 1.777e+01 1.329e+02 1.326e+03 8.474e-02 7.864e-02 8.690e-02
+  7.017e-02 1.812e-01 5.667e-02 5.435e-01 7.339e-01 3.398e+00 7.408e+01
+  5.225e-03 1.308e-02 1.860e-02 1.340e-02 1.389e-02 3.532e-03 2.499e+01
+  2.341e+01 1.588e+02 1.956e+03 1.238e-01 1.866e-01 2.416e-01 1.860e-01
+  2.750e-01 8.902e-02]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All features seem to be quantitative. How will we prepare those data?</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What next?</p>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Before preparing the data, we need to split them:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="c1"># Split the data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
 <pre>((455, 30), (114, 30), (455,), (114,))</pre>
 </div>
 
@@ -13934,20 +14059,22 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now the data preparation with rescaling:</p>
+<p>Now the data preparation with rescaling. We use here the standard scaler of scikit-learn:</p>
 
 </div>
 </div>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-
+<span class="c1"># Instantiate the scaler</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="c1"># Fit and apply it to the train dataset</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="c1"># Just apply it to the test dataset</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 
@@ -13966,12 +14093,13 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="c1"># Fit on train</span>
+<span class="c1"># Instantiate the model</span>
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="c1"># Fit on train dataset</span>
 <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="c1"># Predict on test dataset</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -13989,10 +14117,10 @@ one can do <code>model.predict_proba(X)</code> to retrieve probabilities</p>
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
@@ -14028,7 +14156,48 @@ F1-score: 0.9863013698630138
 </div>
 </div>
 
-</div></section><section>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This has to be compared to the ratio of cancerous patient in the dataset:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_test</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.631578947368421</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14043,10 +14212,10 @@ F1-score: 0.9863013698630138
 
 </div>
 </div>
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -14057,13 +14226,8 @@ F1-score: 0.9863013698630138
 <span class="c1"># Compute ROC AUC</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROC AUC score:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
 
-<span class="c1"># Plot the ROC curve</span>
+<span class="c1"># Compute the ROC curve values</span>
 <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC Curve&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14085,6 +14249,31 @@ F1-score: 0.9863013698630138
 </div>
 </div>
 
+</div>
+</div>
+
+</div></div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the curve</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
 <div class="output_area">
 
     <div class="prompt"></div>
@@ -14103,7 +14292,7 @@ F1-score: 0.9863013698630138
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14115,11 +14304,10 @@ F1-score: 0.9863013698630138
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Regression works just like logistic regression.</p>
-<p>We have a set of features X, labels y and a set of parameters $\theta$ such that:
+<p>We have a set of features X, labels y and a set of parameters $\theta$ such that:</p>
 $$
 \hat{y} = h_\theta(x) = \sum \theta_j X_j + b
-$$</p>
-<p>Where $\hat{y}$ is the prediction of the label y.</p>
+$$<p>Where $\hat{y}$ is the prediction of the label y.</p>
 <blockquote><p>In a regression, the label y is a quantitative data.</p>
 </blockquote>
 
@@ -14130,11 +14318,10 @@ $$</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The training method is the same as a logistic regression: gradient descent.</p>
-<p>But the loss is different, this is usually the Mean Squared Error:
+<p>But the loss is different, this is usually the Mean Squared Error:</p>
 $$
 \mathcal{L}(\theta) = \frac{1}{2m} \sum_i^m (y^{(i)} - \hat{y}^{(i)})^2 = \frac{1}{2m} \sum_i^m (y^{(i)} - h_\theta(x^{(i)}))^2
-$$</p>
-
+$$
 </div>
 </div>
 </div></div></section><section>
@@ -14196,6 +14383,15 @@ $$<blockquote><p>This metric is very commonly used: a MSE of 0 means a perfect r
 
 </div>
 </div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It can be <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html">computed using scikit-learn</a> with:
+<code>sklearn.metrics.mean_squared_error()</code></p>
+
+</div>
+</div>
 </div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14221,6 +14417,34 @@ $$<blockquote><p>For example, if your home price regression model predict a hous
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Mean-Absolute-Error">Mean Absolute Error<a class="anchor-link" href="#Mean-Absolute-Error">&#182;</a></h3>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another metric is the <strong>Mean Absolute Error</strong> (MAE). Instead of taking the square of the error, just compute the absolute value:
+In order to have a mean error, we can:</p>
+$$
+MAE=\frac{1}{m}\sum_{i=1}^{m}|(y^{(i)}-h_\theta(x^{(i)})|
+$$<p>This metric, like the RMSE, provides understandable values. But it gives less weight to highly wrong predictions, compared to MSE.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It can be <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html">computed using scikit-learn</a> with:
+<code>sklearn.metrics.mean_absolute_error()</code></p>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="R-squared">R-squared<a class="anchor-link" href="#R-squared">&#182;</a></h3>
 </div>
 </div>
@@ -14231,7 +14455,7 @@ $$<blockquote><p>For example, if your home price regression model predict a hous
 <p>Finally, a very commonly used metric in regression: $R^2$</p>
 $$
 R^2 = 1 - \frac{\sum_{i=1}^{m}(y^{(i)}-h_\theta(x^{(i)}))^{2} }{\sum_{i=1}^{m}(y^{(i)}-\bar{y})^{2}}
-$$<p>Where $\hat{y}$ is the mean value of all the $y^{(i)}$.</p>
+$$<p>Where $\bar{y}$ is the mean value of all the $y^{(i)}$.</p>
 
 </div>
 </div>
@@ -14245,12 +14469,28 @@ $$<p>Where $\hat{y}$ is the mean value of all the $y^{(i)}$.</p>
 <li>if $R^2 \simeq 0$: there is no correlation between the predictions and the real data</li>
 <li>if $R^2 \simeq -1$: there is a high, inverse correlation between the predictions and the real data</li>
 </ul>
-<blockquote><p>N.B.: Yes, the R2 score can be negative!</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>N.B.: Yes, the $R^2$ score can be negative!</p>
 </blockquote>
 
 </div>
 </div>
-</div></section></section>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It can be <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">computed using scikit-learn</a> with:
+<code>sklearn.metrics.r2_score()</code></p>
+
+</div>
+</div>
+</div></div></section></section>
 </div>
 </div>
 
