@@ -13233,9 +13233,9 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The things to do in data cleaning and preparation:</p>
-<ol>
+<ul>
 <li>Split the data</li>
-</ol>
+</ul>
 
 </div>
 </div>
@@ -13244,11 +13244,11 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Then on the train set:</p>
-<ol>
+<ul>
 <li>Handle missing values, duplicates, outliers (if any)</li>
 <li>Rescale quantitative features</li>
 <li>Encode qualitative features</li>
-</ol>
+</ul>
 
 </div>
 </div>
@@ -13257,11 +13257,11 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally on the test set:</p>
-<ol>
+<ul>
 <li>Apply handling of missing values... performed on train set</li>
 <li>Apply rescaling performed on train set</li>
 <li>Encode qualitative features</li>
-</ol>
+</ul>
 
 </div>
 </div>
@@ -13290,8 +13290,10 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In case of high variance (i.e. overfitting):</p>
 <ul>
-<li>Try either to add regularization, add samples, remove features
-In case of high bias (i.e. underfitting):</li>
+<li>Try either to add regularization, add samples, remove features</li>
+</ul>
+<p>In case of high bias (i.e. underfitting):</p>
+<ul>
 <li>Try either to remove regularization, add features, more complex model</li>
 </ul>
 <p>Then, if features are changed, go back to data preparation and iterate.</p>
@@ -13326,7 +13328,7 @@ In case of high bias (i.e. underfitting):</li>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's try to apply this on the <a href="https://archive.ics.uci.edu/ml/datasets/census+income">Census income dataset</a>.</p>
-<p>The goal is to predict whether income is above of below k$ per year, based on personal information.</p>
+<p>The goal is to predict whether income is above of below 50k$ per year, based on personal information.</p>
 
 </div>
 </div>
@@ -13950,7 +13952,7 @@ dtype: int64</pre>
 <span class="c1"># Print the best score</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;best score:&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
 <span class="c1"># Print the best hyperparams</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;best score:&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;best hyperparams:&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13968,7 +13970,7 @@ dtype: int64</pre>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>best score: 0.8532403644210127
-best score: {&#39;C&#39;: 1.0, &#39;penalty&#39;: &#39;l2&#39;}
+best hyperparams: {&#39;C&#39;: 1.0, &#39;penalty&#39;: &#39;l2&#39;}
 </pre>
 </div>
 </div>
