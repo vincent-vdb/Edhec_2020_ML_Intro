@@ -13210,13 +13210,8 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this course we will explore a new model, called <strong>Decision Trees</strong>, that can be used both for classification and regression.</p>
-<p>It is:</p>
-<ul>
-<li>one of the oldest ML algorithm</li>
-<li>pretty robust</li>
-<li>quite intuitive</li>
-</ul>
-<p>We will then dig into an extension of the Decision Trees: the <strong>Random Forests</strong></p>
+<p>Decision trees are completely different than models we have seen, and pretty intuitive.</p>
+<p>More important, they are used in some of the most powerful classical machine learning models to date: Random Forest and Gradient Boosting.</p>
 
 </div>
 </div>
@@ -13396,21 +13391,30 @@ a.anchor-link {
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This can be seen as a recursive algorithm:</p>
 <ol>
 <li>take all samples in a node</li>
-<li>find a threshold in a feature that minimizes the disorder</li>
+<li>find a threshold in a feature that minimizes the disorder of the splits</li>
 <li>split this into two new nodes</li>
 <li>go back to 1. until your node is pure (or any other condition), thus becoming a leaf</li>
 </ol>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center>
+    <img src="images/root_node.png" width=300>
+</center>
+</div>
+</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13460,7 +13464,7 @@ a.anchor-link {
 <p>It always refers to a sort of disorder, and can be expressed as follow:</p>
 $$
 E = -\sum p_i log_2 p_i
-$$<p>Where $p_i$ is defined as the proportion of element $i$ in a subset.</p>
+$$<p>Where $p_i$ is defined as the proportion of class $i$ in a subset.</p>
 
 </div>
 </div>
@@ -13517,7 +13521,7 @@ $$<p>Because we have:</p>
 <p>Gini impurity is also a disorder measurement. The formula is the following:</p>
 $$
 G(f) = 1-\sum {f_{i}}^{{2}}
-$$<p>Where this time the proportion of element $i$ is defined by $f_i$.</p>
+$$<p>Where this time the proportion of class $i$ is defined by $f_i$.</p>
 
 </div>
 </div>
@@ -13564,9 +13568,16 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Gini and Entropy are almost equivalent, most of the time, in terms of classification performances.</p>
-<p>Though Gini is only fractions, while Entropy is made of logs that are more computationally expensive.</p>
-<p>So in general, we use Gini for computational reasons.</p>
+<p>Gini and Entropy are not much different, most of the time, in terms of classification performances. None is always outperforming the other.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Though Gini is computed only with fractions, while Entropy is made of logs that are more computationally expensive.</p>
+<p>So in general, Gini is preferred computational reasons.</p>
 
 </div>
 </div>
@@ -13581,7 +13592,7 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, in order to split a node optimally, we need to compute the a loss to minimize is the measure of the <strong>disorder decrease</strong> thanks to our split.</p>
+<p>Finally, in order to split a node optimally, we need to compute the loss to minimize thanks to our split.</p>
 <p>To compute this loss, we consider the two children nodes, that we will call <em>left</em> and <em>right</em>.</p>
 
 </div>
@@ -13642,8 +13653,15 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The algorithm will find the split that minimizes this loss to create the new nodes.</p>
-<p>Then, until we reach a limit (pure leaves or any given condition), it will keep splitting the data.</p>
-<p>Once the tree is computed, there may be two kindo of leaves:</p>
+<p>Then, until we reach a limit (pure leaves or any given condition), it will keep splitting the newly created nodes.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once the tree is computed, there may be two kind of leaves:</p>
 <ul>
 <li>When the leaf is pure, then the prediction is the only class remaining in the leaf</li>
 <li>When the leaf is not pure, then the prediction is the most represented class in the leaf</li>
@@ -13672,27 +13690,19 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's have a look at some of the parameters:</p>
+<p>Let's have a look at some of the hyperparameters:</p>
 <ul>
 <li><p><strong>criterion</strong>: The disorder measurement:<code>'gini'</code> or <code>'entropy'</code></p>
 </li>
 <li><p><strong>max_depth</strong>: The maximum depth of the tree: <strong>smaller value leads to greater regularization</strong></p>
 </li>
-<li><p><strong>min_samples_split</strong>: The minimum number of samples required to split a node</p>
+<li><p><strong>min_samples_split</strong>: The minimum number of samples required to split a node, greater value leads to greater regularization</p>
 </li>
-<li><p><strong>min_samples_leaf</strong>: The minimum number of samples required to be at a leaf node</p>
+<li><p><strong>min_samples_leaf</strong>: The minimum number of samples required to be at a leaf node, greater value leads to greater regularization</p>
 </li>
-<li><p><strong>min_impurity_decrease</strong>: A node will be split if this induces a decrease of the impurity
-  greater than or equal to this value.</p>
+<li><p><strong>min_impurity_decrease</strong>: A node will be split if this induces a decrease of the impurity greater than or equal to this value, greater value leads to greater regularization</p>
 </li>
 </ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>
@@ -14450,7 +14460,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The algorithm still has to find the split that minimizes a loss.</p>
-<p>Instead of computing the Gini impurity or the Entropy loss, we will compute the Mean Squared Error (yes, not original).</p>
+<p>Instead of computing the Gini impurity or the Entropy loss, we will compute the Mean Squared Error.</p>
 <p>Thus, the loss function we now be the following:</p>
 $$
 \mathcal{L} = \frac{m_{left}}{m} MSE_{left} + \frac{m_{right}}{m}MSE_{right}
