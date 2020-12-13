@@ -13211,6 +13211,7 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this lecture, we will talk about another type of ensemble learning: the boosting.</p>
 <p>More specifically, we will talk about <strong>adaboost</strong> model.</p>
+<p>AdaBoost is vastly used in face detection to assess whether there is a face in the video or not.</p>
 
 </div>
 </div>
@@ -13232,7 +13233,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As a reminder, in a Decision Tree, we perform binary classifications and can grow the depth of a tree to make the resulting decision boundary complex enough.</p>
+<p>As a reminder, in a Decision Tree, we perform classifications (or regression) and can grow the depth of a tree to make the resulting decision boundary complex enough.</p>
 
 </div>
 </div>
@@ -13264,7 +13265,7 @@ a.anchor-link {
 <p>Recall that the Gini impurity can be defined as follows:</p>
 $$
 G(f) = 1 - \sum {f_i}^2
-$$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
+$$<p>Where $f_i$ is the proportion of class $i$ in the node/leaf.</p>
 
 </div>
 </div>
@@ -13293,16 +13294,16 @@ $$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
 
 </div>
 </div>
-</div></section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p align="center">
-<img src="https://drive.google.com/uc?export=view&id=1Cmh0STP2ZmfEnfe-BXuMLOjFgTeUKZDu">
-</p>
+<center>
+<img src="https://drive.google.com/uc?export=view&id=1Cmh0STP2ZmfEnfe-BXuMLOjFgTeUKZDu" width=600>
+</center>
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13312,21 +13313,21 @@ $$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
 
 </div>
 </div>
-</div></section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p align="center">
-<img src="https://drive.google.com/uc?export=view&id=10bRgs3x9O4CoGXhQ0r_teSGzXPq15-2C">
-</p>
+<center>
+<img src="https://drive.google.com/uc?export=view&id=10bRgs3x9O4CoGXhQ0r_teSGzXPq15-2C" width=600>
+</center>
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Step 3</strong>: Aggregating with majority vote</p>
-<p>Finally, in order to predict a new sample, we run it through all the decision trees, and apply a majority vote on the output of each tree.</p>
+<p><strong>Step 3</strong>: Aggregating with majority or soft vote</p>
+<p>Finally, in order to predict a new sample, we run it through all the decision trees, and apply a vote on the output of each tree.</p>
 
 </div>
 </div>
@@ -13391,19 +13392,19 @@ $$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
 </p>
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This leads to the following limitations and potential solutions:</p>
 <ul>
 <li>instead of training parallel decision trees, we need to <strong>train models sequentially</strong></li>
-<li>in order avoir the "same region, same error", each decision tree should focus on <strong>correcting the previous tree errors</strong></li>
+<li>in order to avoid the "same region, same error", each decision tree should focus on <strong>correcting the previous tree errors</strong></li>
 </ul>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13423,9 +13424,9 @@ $$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There are several changes between AdaBoost and Random Forests:</p>
 <ul>
-<li>decision trees have a very limited max depth of 1: they are thus called <strong>stumps</strong></li>
-<li>each stump may now have an associated weight in the final prediction</li>
-<li>decisions trees are no longer independant: each stump will be trained depending on the previous one</li>
+<li>Decision trees have a very limited max depth of 1: they are thus called <strong>stumps</strong></li>
+<li>Each stump may now have an associated weight in the final prediction</li>
+<li>Decisions trees are no longer independant: each stump will be trained depending on the previous one</li>
 </ul>
 
 </div>
@@ -13552,11 +13553,10 @@ $$<p>Where $f_i$ is the proportion of element $i$ in the node/leaf.</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In our example, the stump misclassified 1 sample out of 12.</p>
-<p>First, we need to compute the total error called ${\epsilon_{t}}$ of the <strong>stump $t$</strong>:
+<p>First, we need to compute the total error called ${\epsilon_{t}}$ of the <strong>stump $t$</strong>:</p>
 $$
-{\epsilon_{t}} = \frac {2}{12}
-$$</p>
-<p>Then, we compute the <strong>amount of say</strong> $\alpha_t$, i.e the weight of the stump in the final vote:</p>
+{\epsilon_{t}} = \frac {1}{12}
+$$<p>Then, we compute the <strong>amount of say</strong> $\alpha_t$, i.e the weight of the stump in the final vote:</p>
 $$ \alpha_t = \frac {1} {2} ln \frac {1-\epsilon_{t}} {\epsilon_{t}} $$
 </div>
 </div>
@@ -13582,7 +13582,15 @@ $$ \alpha_t = \frac {1} {2} ln \frac {1-\epsilon_{t}} {\epsilon_{t}} $$
 
 </div>
 </div>
-</div></section><section>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This amount of say $\alpha_t$ is the weight of the stump $t$ in the final vote.</p>
+
+</div>
+</div>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13599,11 +13607,18 @@ $$ \alpha_t = \frac {1} {2} ln \frac {1-\epsilon_{t}} {\epsilon_{t}} $$
 <p>To compute the weights $w_{t+1} (i)$ of the sample $i$ for the stump $t+1$, we use again the amount of say:</p>
 $$
 \large w_{t+1}(i) = w_{t}(i) e^{\alpha_t } 
-$$<p>Let's have a look at the function $e^{\text{amount of say}}$ to understand:</p>
-
+$$
 </div>
 </div>
 </div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's have a look at the function $e^{\text{amount of say}}$ to understand:</p>
+
+</div>
+</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13612,7 +13627,7 @@ $$<p>Let's have a look at the function $e^{\text{amount of say}}$ to understand:
 </p>
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13644,7 +13659,7 @@ $$
 </p>
 </div>
 </div>
-</div></section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13653,7 +13668,7 @@ $$
 
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13661,20 +13676,27 @@ $$
 <p>Now the weights of the samples do not sum to 1. We just need to normalize the weights to ensure a sum of 1:</p>
 $$
 w_{t+1}(i) = \frac {w_{t+1}(i)} {\sum_i {w_{t+1}(i)}}
-$$<p>We end up with a new dataset looking like this:</p>
-
+$$
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p align="center">
-<img src="https://drive.google.com/uc?export=view&id=1TQmipTp6cpMk2e1n-1HkT4GwrqstPO3W">
-</p>
+<p>We end up with a new dataset looking like this:</p>
+
 </div>
 </div>
-</div></section><section>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center>
+<img src="https://drive.google.com/uc?export=view&id=1TQmipTp6cpMk2e1n-1HkT4GwrqstPO3W" width=600>
+</center>
+</div>
+</div>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13682,8 +13704,8 @@ $$<p>We end up with a new dataset looking like this:</p>
 <p>Using the updated sample weights, we can go to the next iteration and fit the next stump.</p>
 <p>There are 2 ways to handle the new imbalanced weights:</p>
 <ul>
-<li>apply weighted Gini </li>
-<li>create duplicates of the observations by considering the weights as a distribution</li>
+<li>Apply weighted Gini </li>
+<li>Create duplicates of the observations by considering the weights as a distribution</li>
 </ul>
 
 </div>
@@ -13755,16 +13777,22 @@ $$<p>We end up with a new dataset looking like this:</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<center>
-<img src="https://drive.google.com/uc?export=view&id=1FBuu8-rJifE3ubbYGQRFte64nvpA4C0N" width=600>
-</center>
+<p>In other words, we compute a weighted average prediction of the trees $h_t$ with their associated weights $\alpha_t$:</p>
+$$
+H(x) = \sum_t \alpha_t h_t(x)
+$$<p>And finally, we apply a threshold of 0.5 as usual:</p>
+<ul>
+<li>if $H(x) &gt; 0.5$, we predict class 1</li>
+<li>Otherwise, we predict class 0</li>
+</ul>
+
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13791,12 +13819,196 @@ $$<p>We end up with a new dataset looking like this:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>AdaBoost has for a long time been considered as one of the few algorithms that does not overfit. But lately, it has been proven to overfit at some point, and one should be aware of it. AdaBoost is vastly used in face detection to assess whether there is a face in the video or not. AdaBoost can also be used as a regression algorithm.</p>
-<p>Adaboost can be generalized to regression by simply taking the average output among the forest of stumps.</p>
+<p>AdaBoost can also be used as a regression algorithm.</p>
+<p>Adaboost can be generalized to regression by simply taking the average output among the forest of stumps, the same way we did for random forest.</p>
 
 </div>
 </div>
-</div></section></section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="IV.-Implementation">IV. Implementation<a class="anchor-link" href="#IV.-Implementation">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>AdaBoost classifier is available in scikit-learn, with the following signature:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">base_estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;SAMME.R&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the following hyperparameters:</p>
+<ul>
+<li><code>base_estimator=None</code>: by default, it works with decision trees with max depth of 1, but other estimators can be provided</li>
+<li><code>n_estimators=50</code>: the number of iterations of the model, by default 50</li>
+<li><code>learning_rate=1.0</code>: though not cited, a learning rate can be applied to gradually decay the weights of the stumps. It defaults to 1, meaning no decay is applied.</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Example on Iris dataset:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="c1"># Load and split the data</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
+                                                    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="c1"># Rescale the data</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">AdaBoostClassifier</span>
+<span class="c1"># Use a default adaboost</span>
+<span class="n">ada</span> <span class="o">=</span> <span class="n">AdaBoostClassifier</span><span class="p">()</span>
+<span class="n">ada</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">ada</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.9333333333333333</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="c1"># Use an adaboost with decision trees with max depth of 2</span>
+<span class="n">ada</span> <span class="o">=</span> <span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">base_estimator</span><span class="o">=</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">ada</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">ada</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.9666666666666667</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="c1"># Use an adaboost with logistic regression model</span>
+<span class="n">ada_lr</span> <span class="o">=</span> <span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">base_estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">())</span>
+<span class="n">ada_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">ada_lr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.8333333333333334</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></div></section></section>
 </div>
 </div>
 

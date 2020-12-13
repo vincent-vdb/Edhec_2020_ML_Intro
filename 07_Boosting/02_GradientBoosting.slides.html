@@ -13403,7 +13403,7 @@ $$<p>Where:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Notice how our pseudo residuals decreased, meaning our model is learning.</p>
+<p>Notice how our pseudo residuals mostly decreased, meaning our model is learning.</p>
 
 </div>
 </div>
@@ -13415,7 +13415,7 @@ $$<p>Where:</p>
 <p>The next steps are to iterate over:</p>
 <ul>
 <li>build another tree</li>
-<li>compute the predictions of pseudo residuals of previous tree</li>
+<li>compute the predictions of pseudo residuals of this tree</li>
 <li>compute the pseudo residuals according to the prediction</li>
 </ul>
 <p>Until either:</p>
@@ -13451,6 +13451,15 @@ $$<p>Notice that we apply the same learning rate $\alpha$ to each decision tree.
 
 </div>
 </div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Of course, the residual prediction depends on the features values</p>
+</blockquote>
+
+</div>
+</div>
 </div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13477,55 +13486,6 @@ $$<p>Notice that we apply the same learning rate $\alpha$ to each decision tree.
 <p align="center">
 <img src="images/boosting_steps.png">
 </p>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="I.4.-[Optional]-Pseudo-code">I.4. [Optional] Pseudo-code<a class="anchor-link" href="#I.4.-[Optional]-Pseudo-code">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pseudo-Code-:">Pseudo-Code :<a class="anchor-link" href="#Pseudo-Code-:">&#182;</a></h3><p>The algorithm can be then described as the following, on a dataset $(x,y)$ with $x$ the features and $y$ the targets, with a differentiable loss function $\cal{L}$:</p>
-<p>$\cal{L} = \frac {1} {2} (Obs - Pred)^2$, called the Squared Residuals. Notice that since the function is differentiable, we have :</p>
-$$ \frac { \delta } {\delta Pred} \cal{L} = - 1 \times (Obs - Pred) $$
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Step 1</strong> : Initialize the model with a constant value : $F_0(x) = argmin_{\gamma} \sum_i \cal{L}(y_i, \gamma)$. We simply want to minimize the sum of the squared residuals (SSR) by choosing the best prediction $\gamma$.</p>
-<p>If we derive the optimal value for  $\gamma$ :</p>
-$$ \frac { \delta } {\delta \gamma } \sum_i \cal{L}(y_i, \gamma) = -(y_1 - \gamma) + -(y_2 - \gamma) + -(y_3 - \gamma) + ... = 0 $$$$ \sum_i y_i - n * \gamma = 0 $$$$ \gamma = \frac{ \sum_i y_i }{n} = \bar{y} $$<p>This is simply the average of the observations. This justifies our previous constant initialization. In other words, we created a leaf that predicts all samples will weight the average of the samples.</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Step 2</strong> : For m = 1 to M (the maximum number of trees specified, e.g 100)</p>
-<ul>
-<li><p>a) Compute the pseudo-residuals for every sample :</p>
-<p>$$ r_{im} = - \frac {\delta \cal{L} (y_i, F(x_i)) } {\delta F(x_i)} = - ( - 1 \times (Obs - F_{m-1}(x)) ) = (Obs - F_{m-1}(x)) = (Obs - Pred) $$</p>
-</li>
-</ul>
-<p>This derivative is called the Gradient. The Gradient Boost is named after this.</p>
-<ul>
-<li><p>b) Fit a regression tree to the $r_{im}$ values and create terminal regions $R_{jm}$ for j = 1, ... , $J_m$, i.e create the leaves of the tree. At that point, we still need to compute the output value of each leaf.</p>
-</li>
-<li><p>c) For each leaf j = 1... $J_m$, compute the output value that minimized the SSR : $\gamma_{jm} = argmin_{\gamma} \sum_{x_i \in R_{ij}} \cal{L}(y_i, F_{m-1} + \gamma)$. In other words, we will simply predict the output of all the samples stored in a certain leaf.</p>
-</li>
-<li><p>d) Make a new prediction for each sample by updating, accoridng to a learning rate $lr \in (0,1)$ :
-$F_m(x) = F_{m-1}(x) + lr \times \sum_j \gamma_{jm} I(x \in R_{jm} )$. We compute the new value by summing the previous prediction and all the predictions $\gamma$ into which our sample falls.</p>
-</li>
-</ul>
-
 </div>
 </div>
 </div></section></section><section><section>
@@ -13574,8 +13534,8 @@ $F_m(x) = F_{m-1}(x) + lr \times \sum_j \gamma_{jm} I(x \in R_{jm} )$. We comput
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Step 1</strong>: compute the first prediction</p>
-<p>In the first step, instead of computing the average of $y$, we compute the what we can call the log of the odds $\gamma$, which is just the log of the ratio of positive over negative samples:</p>
-$$ \gamma = log( \frac {P(Y=1)} {P(Y=0)} ) = log( \frac {3} {1} ) = log(3) $$
+<p>In the first step, instead of computing the average of $y$, we compute the what we can call the log of the odds $\gamma_0$, which is just the log of the ratio of positive over negative samples:</p>
+$$ \gamma_0 = log( \frac {P(Y=1)} {P(Y=0)} ) = log( \frac {3} {1} ) = log(3) $$
 </div>
 </div>
 </div><div class="fragment">
@@ -13583,8 +13543,7 @@ $$ \gamma = log( \frac {P(Y=1)} {P(Y=0)} ) = log( \frac {3} {1} ) = log(3) $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Then to have a probability prediction from this value, the only thing to do is to apply a logistic function:</p>
-$$ P(Y=1) = \frac {e^{\gamma}} {1 + e^{\gamma}} = \frac {3} {4} = 0.75 $$<p>This is our prediction.</p>
-<p>As for logistic regression, if this probability is greater than 0.5, we classify as 1. Else, we classify as 0.</p>
+$$ P(Y=1) = \frac {e^{\gamma_0}} {1 + e^{\gamma_0}} = \frac {3} {4} = 0.75 $$<p>This is our first naive <strong>prediction</strong>.</p>
 
 </div>
 </div>
@@ -13641,10 +13600,22 @@ $$ P(Y=1) = \frac {e^{\gamma}} {1 + e^{\gamma}} = \frac {3} {4} = 0.75 $$<p
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We need to apply another transformation :</p>
-$$ \gamma_{i+1} = \frac { \sum_i Residuals_i } { \sum(Residuals_i \times (1-Residuals_i))} $$
+$$ \text{res_pred} = \frac { \sum_j Residuals_j } { \sum(Pred_j \times (1-Pred_j))} $$
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Where:</p>
+<ul>
+<li>$Residuals_j$ is the residual for the sample $j$, here either 0.25 or -0.75</li>
+<li>$Pred_j$ is the previous prediction for the sample $j$, here 0.75</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13653,15 +13624,17 @@ $$ \gamma_{i+1} = \frac { \sum_i Residuals_i } { \sum(Residuals_i \times (1-Res
 $$ \text{res_pred} = \frac {0.25 - 0.75} { 0.75 * (1-0.75) + 0.75*(1-0.75)} = -1.33 $$
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can finally compute the new log odds prediction $\gamma_1$ for that leaf using the following formula (assuming a learning rate $\alpha = 0.1$:</p>
+<p>We can finally compute the new log odds prediction $\gamma_1$ for that leaf using the following formula (assuming a learning rate $\alpha = 0.1$):</p>
 $$
-\gamma_1 = \gamma + \alpha \times \text{res_pred} = log(3) + 0.1 * -1.33 = 0.9656
+\gamma_1 = \gamma_0 + \alpha \times \text{res_pred} = log(3) + 0.1 \times -1.33 = 0.9656
 $$<p>And convert the new log odds prediction into a probability using the logistic function:</p>
-$$ P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + e^{0.9656}} = 0.7242 $$
+$$
+P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + e^{0.9656}} = 0.7242
+$$
 </div>
 </div>
 </div></section><section>
@@ -13687,8 +13660,8 @@ $$ P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + 
 <p>Gradient boosting model is very popular. Thus, there exist several great implementations of this model, with some differences.</p>
 <p>We will just have a quick look here at the most used ones:</p>
 <ul>
-<li>Extrement Gradient Boost</li>
-<li>Light Gradient Boosting Model</li>
+<li>Extreme Gradient Boost or XGBoost</li>
+<li>Light Gradient Boosting Model or LightGBM</li>
 <li>Cat Boost</li>
 </ul>
 
@@ -13738,9 +13711,9 @@ $$ P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + 
 <p>Pre-sorting splitting works this way:</p>
 <ul>
 <li>For each node, enumerate over all features</li>
-<li>For each feature, sort the instances by feature value</li>
-<li>Use a linear scan to decide the best split along that feature basis information gain</li>
-<li>Take the best split solution along all the features</li>
+<li>For each feature, sort the samples by feature value</li>
+<li>Find the best split along that feature</li>
+<li>Take the best split solution among all the features</li>
 </ul>
 <p>This might still be long to compute, so XGBoost uses the concept of Histogram-based split, which splits all the data points for a feature into discrete bins and uses these bins to find the split value of histogram.</p>
 
@@ -13775,7 +13748,7 @@ $$ P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + 
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>LightGBM uses a novel technique of Gradient-based One-Side Sampling (GOSS) to filter out the samples for finding a split value.</p>
-<p>Gradient-based One-Side Sampling keeps all the instances with large gradients and performs random sampling on the instances with small gradients. For example, let’s say we have 500K rows of data where 10k rows have higher gradients. So the algorithm will choose (10k rows of higher gradient+ x% of remaining 490k rows chosen randomly).</p>
+<p>Gradient-based One-Side Sampling keeps all the instances with large gradients and performs random sampling on the instances with small gradients. For example, let’s say we have 500k rows of data where 10k rows have higher gradients. So the algorithm will choose 10k rows of higher gradient and a fraction of the remaining 490k rows chosen randomly.</p>
 <p>A leaf with higher gradient/error is used for growing further. This is what we call a leaf-wise growth.</p>
 
 </div>
@@ -13814,7 +13787,6 @@ $$ P(Y=1) = \frac {e^{\gamma_1}} {1 + e^{\gamma_1}} = \frac {e^{0.9656}} {1 + 
 <ul>
 <li>Categorical features support (even text categories)</li>
 <li>Fast and scalable GPU version</li>
-<li>User-friendly APIs...</li>
 </ul>
 <p>If you'd like to know more: <a href="https://catboost.ai/">https://catboost.ai/</a></p>
 
@@ -14465,7 +14437,7 @@ accuracy: 0.7333333333333333
 <p><em>Random Forest:</em></p>
 <ul>
 <li>is a Bagging algorithm</li>
-<li>that makes a forest of decision trees</li>
+<li>makes a forest of decision trees</li>
 <li>gives the same weight to each decision tree</li>
 <li>grows trees independently</li>
 </ul>
@@ -14493,7 +14465,7 @@ accuracy: 0.7333333333333333
 <p><em>Gradient Boosting Classification:</em></p>
 <ul>
 <li>same as regression</li>
-<li>applies as transformation to allow for classification</li>
+<li>applies a transformation to allow for classification</li>
 </ul>
 
 </div>
