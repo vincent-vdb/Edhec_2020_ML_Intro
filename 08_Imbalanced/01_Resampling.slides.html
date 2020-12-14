@@ -13233,7 +13233,7 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's work on a real life application: credit card fraud detection. We will work on <a href="https://www.kaggle.com/mlg-ulb/creditcardfraud">this dataset</a>.</p>
-<p>This dataset is made of 33 features, anonymized for confidentiality (except the <code>Time</code> and <code>Amount</code> features).</p>
+<p>This dataset is made of 30 features, anonymized for confidentiality (except the <code>Time</code> and <code>Amount</code> features).</p>
 
 </div>
 </div>
@@ -13245,7 +13245,6 @@ a.anchor-link {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;fraud.csv&#39;</span><span class="p">)</span>
-
 <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
@@ -13550,6 +13549,42 @@ a.anchor-link {
 <pre>0    28432
 1       49
 Name: Class, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Or in ratio</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    0.99828
+1    0.00172
+Name: Class, dtype: float64</pre>
 </div>
 
 </div>
@@ -13871,7 +13906,7 @@ F1-score: 0.4285714285714285
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>ROC AUC is also a better choice than the accuracy, though here may not be the best.</p>
+<blockquote><p>ROC AUC is also a better choice than the accuracy</p>
 </blockquote>
 
 </div>
@@ -13959,7 +13994,7 @@ F1-score: 0.4285714285714285
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A typical Random Undersampling would be to increase the balanced by <strong>dropping regular samples</strong>, to have a 1/10 ratio for example:</p>
 <ul>
-<li>441 regular transactions</li>
+<li>490 regular transactions</li>
 <li>49 fraudulent transactions</li>
 </ul>
 <p>We would then have $\frac{49}{490} = 10 \%$ of fraudulent transactions.</p>
@@ -13970,7 +14005,7 @@ F1-score: 0.4285714285714285
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>The drawback of this method is that we may <strong>lose most of our data</strong></p>
+<blockquote><p>The drawback of this method is that we may <strong>lose most of our data</strong>: here 98% of the data would be unused</p>
 </blockquote>
 
 </div>
@@ -14066,6 +14101,9 @@ Name: Class, dtype: int64</pre>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision:&#39;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall:&#39;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1-score:&#39;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="c1"># Compute the ROC AUC</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROC AUC:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -14082,9 +14120,10 @@ Name: Class, dtype: int64</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Precision: 0.10126582278481013
+<pre>Precision: 0.08247422680412371
 Recall: 0.8
-F1-score: 0.1797752808988764
+F1-score: 0.14953271028037382
+ROC AUC: 0.855380692808159
 </pre>
 </div>
 </div>
@@ -14100,7 +14139,8 @@ F1-score: 0.1797752808988764
 <ul>
 <li>Precision: 0.75</li>
 <li>Recall: 0.3</li>
-<li>F1-score: 0.4285714285714285</li>
+<li>F1-score: 0.43</li>
+<li>ROC AUC: 0.93</li>
 </ul>
 <p>It did improve recall, but other metrics are not better.</p>
 
@@ -14146,13 +14186,20 @@ F1-score: 0.1797752808988764
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Based on the k nearest neighboors of the fraudulent transactions,</p>
 <p>The first step is to pick randomly a fraudulent sample $x_i$.</p>
 <p>Then, thanks to k-NN, pick randomly $x_{zi}$, one of the fraudulent k nearest neighboors of $x_i$.</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>You end up having two, close, fradulent transactions. And you will compute a new, synthetic, fraudulent transaction $x_{new}$:
 $$
 x_{new} = x_i + \lambda \times (x_{zi} - x_i)
@@ -14268,6 +14315,9 @@ Name: Class, dtype: int64</pre>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision:&#39;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall:&#39;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1-score:&#39;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="c1"># Compute the ROC AUC</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROC AUC:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -14284,9 +14334,10 @@ Name: Class, dtype: int64</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Precision: 0.5333333333333333
+<pre>Precision: 0.5
 Recall: 0.8
-F1-score: 0.64
+F1-score: 0.6153846153846154
+ROC AUC: 0.861385616317918
 </pre>
 </div>
 </div>
@@ -14302,9 +14353,10 @@ F1-score: 0.64
 <ul>
 <li>Precision: 0.75</li>
 <li>Recall: 0.3</li>
-<li>F1-score: 0.4285714285714285</li>
+<li>F1-score: 0.43</li>
+<li>ROC AUC: 0.93</li>
 </ul>
-<p>It did improve recall and the F1-score, but precision remains lower.</p>
+<p>It did improve recall and the F1-score, but precision and ROC AUC remain lower.</p>
 
 </div>
 </div>
@@ -14314,6 +14366,20 @@ F1-score: 0.64
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p>For a robust evaluation and comparison, hyperparameter optimization should be performed</p>
 </blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To conclude, in case of highly imbalanced dataset:</p>
+<ul>
+<li>Do not use accuracy as evaluation metric</li>
+<li>You can use a resampling method, either undersampling or oversampling</li>
+<li>Random undersampling might drop a lot of data</li>
+<li>SMOTE (oversampling) might generate synthetic, unrealistic data</li>
+</ul>
 
 </div>
 </div>
